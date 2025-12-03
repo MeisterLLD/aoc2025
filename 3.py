@@ -10,7 +10,6 @@ def maxsubint(chaine, size):
 
 tot1, tot2 = 0, 0
 for ligne in lignes:
-    n = len(ligne)
     tot1 += int(maxsubint(ligne, 2))
     tot2 += int(maxsubint(ligne, 12))
 print('Part 1 :', tot1)
