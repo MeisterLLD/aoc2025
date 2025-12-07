@@ -7,21 +7,22 @@ for i, ligne in enumerate(lignes):
         if char == 'S':
             start = (i,j)
 
-def isactive( pos, splitters):
+def isactive(pos, splitters):
     p, q = pos
     if p == 2:
         return True
-    y = p-1
-    while (y,q) not in splitters and (y,q-1) not in splitters and (y,q+1) not in splitters:
-        y -= 1
-    return (y,q) not in splitters
 
+    if (p-1,q-1) not in splitters and (p-1,q) not in splitters and (p-1,q+1) not in splitters:
+        return isactive((p-1,q), splitters)
+
+    return (p-1,q) not in splitters
 
 ans1 = sum([ int(isactive(pos, splitters)) for pos in splitters ])
 print('Part 1 :', ans1)
 
 splitters = set(splitters)
 from functools import cache
+
 @cache
 def nbtimelines(pos):
     pmax = max( T[0] for T in splitters)
@@ -34,4 +35,4 @@ def nbtimelines(pos):
 
     return nbtimelines((p,q-1)) + nbtimelines((p, q+1))
 
-print('Part 2 :', nbtimelines(start) )
+print('Part 2 :', nbtimelines(start))
