@@ -18,7 +18,7 @@ def isactive( pos, splitters):
 
 
 ans1 = sum([ int(isactive(pos, splitters)) for pos in splitters ])
-print('Part 1: ', ans1)
+print('Part 1 :', ans1)
 
 splitters = set(splitters)
 from functools import cache
