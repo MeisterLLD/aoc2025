@@ -4,6 +4,8 @@ for i, ligne in enumerate(lignes):
     for j, char in enumerate(ligne):
         if char == '^':
             splitters.append((i,j))
+        if char == 'S':
+            start = (i,j)
 
 def isactive( pos, splitters):
     p, q = pos
@@ -21,8 +23,7 @@ print('Part 1: ', ans1)
 splitters = set(splitters)
 from functools import cache
 @cache
-
-def nbtimelines( pos):
+def nbtimelines(pos):
     pmax = max( T[0] for T in splitters)
     p, q = pos
     if p > pmax:
@@ -32,3 +33,5 @@ def nbtimelines( pos):
         return nbtimelines((p+1,q))
 
     return nbtimelines((p,q-1)) + nbtimelines((p, q+1))
+
+print('Part 2 :', nbtimelines(start) )
